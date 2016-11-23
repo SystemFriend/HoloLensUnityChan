@@ -65,20 +65,19 @@ namespace UnityChan
 	
 		private void UpdateParameter (string fieldName, float baseValue, AnimationCurve curve)
 		{
-			var start = curve.keys [0].time;
-			var end = curve.keys [curve.length - 1].time;
-			//var step	= (end - start) / (springBones.Length - 1);
-/*		
-			var prop = springBones [0].GetType ().GetField (fieldName, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+			//var start = curve.keys [0].time;
+			//var end = curve.keys [curve.length - 1].time;
+			////var step	= (end - start) / (springBones.Length - 1);
 		
-			for (int i = 0; i < springBones.Length; i++) {
-				//Kobayashi
-				if (!springBones [i].isUseEachBoneForceSettings) {
-					var scale = curve.Evaluate (start + (end - start) * i / (springBones.Length - 1));
-					prop.SetValue (springBones [i], baseValue * scale);
-				}
-			}
-*/
+			//var prop = springBones [0].GetType ().GetField (fieldName, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+		
+			//for (int i = 0; i < springBones.Length; i++) {
+			//	//Kobayashi
+			//	if (!springBones [i].isUseEachBoneForceSettings) {
+			//		var scale = curve.Evaluate (start + (end - start) * i / (springBones.Length - 1));
+			//		prop.SetValue (springBones [i], baseValue * scale);
+			//	}
+			//}
 		}
 	}
 }
