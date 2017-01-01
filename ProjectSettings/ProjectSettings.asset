@@ -451,7 +451,7 @@ PlayerSettings:
   metroCertificateNotAfter: 009ca6e99a63d301
   metroApplicationDescription: HoloLensUnityChan
   wsaImages: {}
-  metroTileShortName: HoloToolkit-Unity
+  metroTileShortName: HoloUnityChan
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
