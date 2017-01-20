@@ -34,6 +34,12 @@ public class Control : MonoBehaviour {
                 this.unityChan.SetActive(true);
                 startTime = DateTime.Now;
             }
+
+            if  (Vector3.Distance(this.unityChan.transform.position, Vector3.zero) > 20.0f)
+            {
+                //Unityちゃん落下消失対策
+                this.unityChan.transform.localPosition = initialPosition;
+            }
             yield return 0;
         }
     }
