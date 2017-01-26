@@ -1,10 +1,14 @@
-﻿using System;
+﻿using HoloToolkit.Unity.InputModule;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Control : MonoBehaviour {
 
     public GameObject unityChan;
+    public HoloToolkit.Unity.InputModule.Cursor cursor;
+    public int actionChangeInterval = 1000;
 
     void Start()
     {
@@ -16,6 +20,13 @@ public class Control : MonoBehaviour {
         var startTime = DateTime.Now;
         var unityChanRigidbody = this.unityChan.GetComponent<Rigidbody>();
         var initialPosition = this.unityChan.transform.localPosition;
+
+        var prevCursorState = this.cursor.CheckCursorState();
+        var selectStart = DateTime.MinValue;
+        var isDragging = false;
+
+        var copies = new List<GameObject>();
+
 
         unityChanRigidbody.isKinematic = true;
         while (true)
@@ -32,6 +43,13 @@ public class Control : MonoBehaviour {
                 this.unityChan.SetActive(false);
                 this.unityChan.transform.localPosition = initialPosition;
                 this.unityChan.SetActive(true);
+
+                foreach (var copy in copies)
+                {
+                    GameObject.Destroy(copy);
+                }
+                copies.Clear();
+
                 startTime = DateTime.Now;
             }
 
@@ -40,6 +58,48 @@ public class Control : MonoBehaviour {
                 //Unityちゃん落下消失対策
                 this.unityChan.transform.localPosition = initialPosition;
             }
+
+
+
+            var dragSpan = (DateTime.Now - selectStart).TotalMilliseconds;
+            var actionIndex = ((int)dragSpan / this.actionChangeInterval);
+
+            var cursorState = this.cursor.CheckCursorState();
+            if (prevCursorState != cursorState)
+            {
+                Debug.Log(cursorState + " " + ((GazeManager.Instance.HitObject != null) ? GazeManager.Instance.HitObject.name : ""));
+                if (cursorState == HoloToolkit.Unity.InputModule.Cursor.CursorStateEnum.Select)
+                {
+                    if ((GazeManager.Instance.HitObject == null) ||
+                        ((GazeManager.Instance.HitObject != null) && (GazeManager.Instance.HitObject.name.StartsWith("Surface-"))))
+                    {
+                        selectStart = DateTime.Now;
+                        isDragging = true;
+                    }
+                }
+                else if (isDragging)
+                {
+                    switch (actionIndex)
+                    {
+                        case 0:
+                            // nothing to do.
+                            break;
+                        case 1:
+                        case 2:
+                            var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
+                            var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+                            var copy = GameObject.Instantiate(this.unityChan);
+                            copy.GetComponent<Animator>().Play(animHash, -1, animTime);
+                            copy.transform.position = this.cursor.Position;
+                            copy.transform.LookAt(Camera.main.transform);
+                            copies.Add(copy);
+                            break;
+                    }
+                    isDragging = false;
+                }
+            }
+
+            prevCursorState = cursorState;
             yield return 0;
         }
     }
