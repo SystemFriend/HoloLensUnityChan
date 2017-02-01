@@ -92,7 +92,7 @@ public class Control : MonoBehaviour {
                             copy.GetComponent<Animator>().Play(animHash, -1, animTime);
                             copy.transform.position = this.cursor.Position;
                             copy.transform.LookAt(Camera.main.transform);
-                            copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.y, 0f);
+                            copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
                             copies.Add(copy);
                             break;
                     }
