@@ -1,4 +1,5 @@
 ﻿using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity.SpatialMapping;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ public class Control : MonoBehaviour {
     public GameObject unityChan;
     public HoloToolkit.Unity.InputModule.Cursor cursor;
     public int actionChangeInterval = 1000;
+    public SpatialMappingManager spatialMappingManager;
 
     void Start()
     {
@@ -86,6 +88,7 @@ public class Control : MonoBehaviour {
                             break;
                         case 1:
                         case 2:
+                        case 3:
                             var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
                             var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
                             var copy = GameObject.Instantiate(this.unityChan);
@@ -94,6 +97,12 @@ public class Control : MonoBehaviour {
                             copy.transform.LookAt(Camera.main.transform);
                             copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
                             copies.Add(copy);
+                            break;
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                            this.spatialMappingManager.DrawVisualMeshes = !this.spatialMappingManager.DrawVisualMeshes;
                             break;
                     }
                     isDragging = false;
