@@ -5,15 +5,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Control : MonoBehaviour {
-
+public class Control : MonoBehaviour, IHoldHandler
+{
+    public TextMesh guidanceText;
     public GameObject unityChan;
-    public HoloToolkit.Unity.InputModule.Cursor cursor;
-    public int actionChangeInterval = 1000;
     public SpatialMappingManager spatialMappingManager;
+    private DateTime HoldStartTime { get; set; }
+    private bool IsHolding { get; set; }
+    private IList<GameObject> copyActors = new List<GameObject>();
+
+    private const int actionChangeInterval = 1000;
 
     void Start()
     {
+        InputManager.Instance.AddGlobalListener(this.gameObject);
+
         this.StartCoroutine(this.Process());
     }
 
@@ -22,12 +28,7 @@ public class Control : MonoBehaviour {
         var startTime = DateTime.Now;
         var unityChanRigidbody = this.unityChan.GetComponent<Rigidbody>();
         var initialPosition = this.unityChan.transform.localPosition;
-
-        var prevCursorState = this.cursor.CheckCursorState();
-        var selectStart = DateTime.MinValue;
-        var isDragging = false;
-
-        var copies = new List<GameObject>();
+        this.copyActors = new List<GameObject>();
 
 
         unityChanRigidbody.isKinematic = true;
@@ -38,6 +39,11 @@ public class Control : MonoBehaviour {
                 //10秒後にisKinematicを開放して重力落下を開始させる
                 unityChanRigidbody.isKinematic = false;
             }
+            else if (unityChanRigidbody.isKinematic)
+            {
+                yield return 0;
+                continue;
+            }
 
             if ((DateTime.Now - startTime) > new TimeSpan(0, 4, 0))
             {
@@ -46,11 +52,11 @@ public class Control : MonoBehaviour {
                 this.unityChan.transform.localPosition = initialPosition;
                 this.unityChan.SetActive(true);
 
-                foreach (var copy in copies)
+                foreach (var copy in this.copyActors)
                 {
                     GameObject.Destroy(copy);
                 }
-                copies.Clear();
+                this.copyActors.Clear();
 
                 startTime = DateTime.Now;
             }
@@ -61,56 +67,88 @@ public class Control : MonoBehaviour {
                 this.unityChan.transform.localPosition = initialPosition;
             }
 
-
-
-            var dragSpan = (DateTime.Now - selectStart).TotalMilliseconds;
-            var actionIndex = ((int)dragSpan / this.actionChangeInterval);
-
-            var cursorState = this.cursor.CheckCursorState();
-            if (prevCursorState != cursorState)
+            if (this.IsHolding)
             {
-                Debug.Log(cursorState + " " + ((GazeManager.Instance.HitObject != null) ? GazeManager.Instance.HitObject.name : ""));
-                if (cursorState == HoloToolkit.Unity.InputModule.Cursor.CursorStateEnum.Select)
+                var holdSpan = (DateTime.Now - this.HoldStartTime).TotalMilliseconds;
+                var actionIndex = ((int)holdSpan / actionChangeInterval);
+                Debug.Log("actionIndex=" + actionIndex);
+                switch (actionIndex)
                 {
-                    if ((GazeManager.Instance.HitObject == null) ||
-                        ((GazeManager.Instance.HitObject != null) && (GazeManager.Instance.HitObject.name.StartsWith("Surface-"))))
-                    {
-                        selectStart = DateTime.Now;
-                        isDragging = true;
-                    }
-                }
-                else if (isDragging)
-                {
-                    switch (actionIndex)
-                    {
-                        case 0:
-                            // nothing to do.
-                            break;
-                        case 1:
-                        case 2:
-                        case 3:
-                            var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
-                            var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
-                            var copy = GameObject.Instantiate(this.unityChan);
-                            copy.GetComponent<Animator>().Play(animHash, -1, animTime);
-                            copy.transform.position = this.cursor.Position;
-                            copy.transform.LookAt(Camera.main.transform);
-                            copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
-                            copies.Add(copy);
-                            break;
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                            this.spatialMappingManager.DrawVisualMeshes = !this.spatialMappingManager.DrawVisualMeshes;
-                            break;
-                    }
-                    isDragging = false;
+                    case 1:
+                    case 2:
+                    case 3:
+                        this.guidanceText.text = "Add Unity-chan.";
+                        break;
+                    case 4:
+                    case 5:
+                    case 6:
+                        this.guidanceText.text = "Switch Spatial Showing.";
+                        break;
+                    default:
+                        this.guidanceText.text = string.Empty;
+                        break;
                 }
             }
+            else
+            {
+                this.guidanceText.text = string.Empty;
+            }
 
-            prevCursorState = cursorState;
             yield return 0;
+        }
+    }
+
+    public void OnHoldStarted(HoldEventData eventData)
+    {
+        this.HoldStartTime = DateTime.Now;
+        this.IsHolding = true;
+    }
+
+    public void OnHoldCompleted(HoldEventData eventData)
+    {
+        this.OnHoldReleased();
+    }
+
+    public void OnHoldCanceled(HoldEventData eventData)
+    {
+        this.OnHoldReleased();
+    }
+
+    private void OnHoldReleased()
+    {
+        if (this.IsHolding)
+        {
+            try
+            {
+                var holdSpan = (DateTime.Now - this.HoldStartTime).TotalMilliseconds;
+                var actionIndex = ((int)holdSpan / actionChangeInterval);
+                Debug.Log("actionIndex=" + actionIndex);
+
+                switch (actionIndex)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
+                        var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+                        var copy = GameObject.Instantiate(this.unityChan);
+                        copy.GetComponent<Animator>().Play(animHash, -1, animTime);
+                        copy.transform.position = GazeManager.Instance.HitPosition;
+                        copy.transform.LookAt(Camera.main.transform);
+                        copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
+                        this.copyActors.Add(copy);
+                        break;
+                    case 4:
+                    case 5:
+                    case 6:
+                        this.spatialMappingManager.DrawVisualMeshes = !this.spatialMappingManager.DrawVisualMeshes;
+                        break;
+                }
+            }
+            finally
+            {
+                this.IsHolding = false;
+            }
         }
     }
 }
