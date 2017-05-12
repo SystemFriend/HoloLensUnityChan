@@ -10,9 +10,12 @@ public class Control : MonoBehaviour, IHoldHandler
     public TextMesh guidanceText;
     public GameObject unityChan;
     public SpatialMappingManager spatialMappingManager;
+    public Material spatialMappingMaterialWireframe;
+    public Material spatialMappingMaterialOcclusion;
     private DateTime HoldStartTime { get; set; }
     private bool IsHolding { get; set; }
     private IList<GameObject> copyActors = new List<GameObject>();
+    private bool IsDrawSpatialMappingWireframe { get; set; }
 
     private const int actionChangeInterval = 1000;
 
@@ -21,6 +24,17 @@ public class Control : MonoBehaviour, IHoldHandler
         InputManager.Instance.AddGlobalListener(this.gameObject);
 
         this.StartCoroutine(this.Process());
+        this.StartCoroutine(this.MusicStarter());
+    }
+
+    private IEnumerator MusicStarter()
+    {
+        var audioSource = this.GetComponent<AudioSource>();
+        audioSource.Stop();
+
+        yield return new WaitForSeconds(2f);
+
+        audioSource.Play();
     }
 
     private IEnumerator Process()
@@ -29,7 +43,7 @@ public class Control : MonoBehaviour, IHoldHandler
         var unityChanRigidbody = this.unityChan.GetComponent<Rigidbody>();
         var initialPosition = this.unityChan.transform.localPosition;
         this.copyActors = new List<GameObject>();
-
+        this.IsDrawSpatialMappingWireframe = true;
 
         unityChanRigidbody.isKinematic = true;
         while (true)
@@ -59,6 +73,7 @@ public class Control : MonoBehaviour, IHoldHandler
                 this.copyActors.Clear();
 
                 startTime = DateTime.Now;
+                this.StartCoroutine(this.MusicStarter());
             }
 
             if  (Vector3.Distance(this.unityChan.transform.position, Vector3.zero) > 20.0f)
@@ -141,7 +156,8 @@ public class Control : MonoBehaviour, IHoldHandler
                     case 4:
                     case 5:
                     case 6:
-                        this.spatialMappingManager.DrawVisualMeshes = !this.spatialMappingManager.DrawVisualMeshes;
+                        this.IsDrawSpatialMappingWireframe = !this.IsDrawSpatialMappingWireframe;
+                        this.spatialMappingManager.SurfaceMaterial = this.IsDrawSpatialMappingWireframe ? this.spatialMappingMaterialWireframe : this.spatialMappingMaterialOcclusion;
                         break;
                 }
             }

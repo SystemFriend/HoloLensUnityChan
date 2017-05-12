@@ -1,4 +1,6 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 Shader "Custom/Light Beam"
 {
@@ -41,7 +43,7 @@ Shader "Custom/Light Beam"
     {
         v2f o;
 
-        o.position = mul(UNITY_MATRIX_MVP, v.vertex);
+        o.position = UnityObjectToClipPos(v.vertex);
 
         o.uv0 = TRANSFORM_TEX(v.texcoord, _MainTex);
 
