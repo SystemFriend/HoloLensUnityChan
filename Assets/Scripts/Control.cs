@@ -43,7 +43,6 @@ public class Control : MonoBehaviour, IHoldHandler
         var unityChanRigidbody = this.unityChan.GetComponent<Rigidbody>();
         var initialPosition = this.unityChan.transform.localPosition;
         this.copyActors = new List<GameObject>();
-        this.IsDrawSpatialMappingWireframe = true;
 
         unityChanRigidbody.isKinematic = true;
         while (true)
