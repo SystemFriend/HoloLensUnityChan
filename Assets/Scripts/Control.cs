@@ -1,4 +1,5 @@
-﻿using HoloToolkit.Unity.InputModule;
+﻿using HoloToolkit.Unity;
+using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity.SpatialMapping;
 using System;
 using System.Collections;
@@ -12,6 +13,7 @@ public class Control : MonoBehaviour, IHoldHandler
     public SpatialMappingManager spatialMappingManager;
     public Material spatialMappingMaterialWireframe;
     public Material spatialMappingMaterialOcclusion;
+    public AudioSource audioSource;
     private DateTime HoldStartTime { get; set; }
     private bool IsHolding { get; set; }
     private IList<GameObject> copyActors = new List<GameObject>();
@@ -29,12 +31,11 @@ public class Control : MonoBehaviour, IHoldHandler
 
     private IEnumerator MusicStarter()
     {
-        var audioSource = this.GetComponent<AudioSource>();
-        audioSource.Stop();
+        this.audioSource.Stop();
 
         yield return new WaitForSeconds(2f);
 
-        audioSource.Play();
+        this.audioSource.Play();
     }
 
     private IEnumerator Process()
@@ -45,6 +46,7 @@ public class Control : MonoBehaviour, IHoldHandler
         this.copyActors = new List<GameObject>();
 
         unityChanRigidbody.isKinematic = true;
+        CameraCache.Main.nearClipPlane = 0.01f;
         while (true)
         {
             if (unityChanRigidbody.isKinematic && ((DateTime.Now - startTime) > new TimeSpan(0, 0, 10)))
