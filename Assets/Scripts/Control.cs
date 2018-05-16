@@ -14,6 +14,7 @@ public class Control : MonoBehaviour, IHoldHandler
     public Material spatialMappingMaterialWireframe;
     public Material spatialMappingMaterialOcclusion;
     public AudioSource audioSource;
+    public GameObject floor;
     private DateTime HoldStartTime { get; set; }
     private bool IsHolding { get; set; }
     private IList<GameObject> copyActors = new List<GameObject>();
@@ -27,6 +28,8 @@ public class Control : MonoBehaviour, IHoldHandler
 
         this.StartCoroutine(this.Process());
         this.StartCoroutine(this.MusicStarter());
+
+        this.floor.SetActive(MixedRealityCameraManager.Instance.CurrentDisplayType == MixedRealityCameraManager.DisplayType.Opaque);
     }
 
     private IEnumerator MusicStarter()
