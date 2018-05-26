@@ -1,12 +1,14 @@
 ﻿using HoloToolkit.Unity;
 using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity.Receivers;
 using HoloToolkit.Unity.SpatialMapping;
+using HoloToolkit.Unity.UX;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Control : MonoBehaviour, IHoldHandler
+public class Control : InteractionReceiver
 {
     public TextMesh guidanceText;
     public GameObject unityChan;
@@ -15,21 +17,19 @@ public class Control : MonoBehaviour, IHoldHandler
     public Material spatialMappingMaterialOcclusion;
     public AudioSource audioSource;
     public GameObject floor;
-    private DateTime HoldStartTime { get; set; }
-    private bool IsHolding { get; set; }
-    private IList<GameObject> copyActors = new List<GameObject>();
+    public AppBar appBar;
+    public IList<GameObject> copyActors = new List<GameObject>();
     private bool IsDrawSpatialMappingWireframe { get; set; }
-
-    private const int actionChangeInterval = 1000;
+    private float lastTimeTapped = 0f;
+    private float coolDownTime = 0.5f;
 
     void Start()
     {
-        InputManager.Instance.AddGlobalListener(this.gameObject);
-
         this.StartCoroutine(this.Process());
         this.StartCoroutine(this.MusicStarter());
 
         this.floor.SetActive(MixedRealityCameraManager.Instance.CurrentDisplayType == MixedRealityCameraManager.DisplayType.Opaque);
+        this.lastTimeTapped = Time.time + this.coolDownTime;
     }
 
     private IEnumerator MusicStarter()
@@ -85,90 +85,35 @@ public class Control : MonoBehaviour, IHoldHandler
                 //Unityちゃん落下消失対策
                 this.unityChan.transform.localPosition = initialPosition;
             }
-
-            if (this.IsHolding)
-            {
-                var holdSpan = (DateTime.Now - this.HoldStartTime).TotalMilliseconds;
-                var actionIndex = ((int)holdSpan / actionChangeInterval);
-                Debug.Log("actionIndex=" + actionIndex);
-                switch (actionIndex)
-                {
-                    case 1:
-                    case 2:
-                    case 3:
-                        this.guidanceText.text = "Add Unity-chan.";
-                        break;
-                    case 4:
-                    case 5:
-                    case 6:
-                        this.guidanceText.text = "Switch Spatial Showing.";
-                        break;
-                    default:
-                        this.guidanceText.text = string.Empty;
-                        break;
-                }
-            }
-            else
-            {
-                this.guidanceText.text = string.Empty;
-            }
+            this.guidanceText.text = string.Empty;
 
             yield return 0;
         }
     }
 
-    public void OnHoldStarted(HoldEventData eventData)
+    protected override void InputClicked(GameObject obj, InputClickedEventData eventData)
     {
-        this.HoldStartTime = DateTime.Now;
-        this.IsHolding = true;
-    }
-
-    public void OnHoldCompleted(HoldEventData eventData)
-    {
-        this.OnHoldReleased();
-    }
-
-    public void OnHoldCanceled(HoldEventData eventData)
-    {
-        this.OnHoldReleased();
-    }
-
-    private void OnHoldReleased()
-    {
-        if (this.IsHolding)
+        if (Time.time < this.lastTimeTapped + this.coolDownTime)
         {
-            try
-            {
-                var holdSpan = (DateTime.Now - this.HoldStartTime).TotalMilliseconds;
-                var actionIndex = ((int)holdSpan / actionChangeInterval);
-                Debug.Log("actionIndex=" + actionIndex);
+            return;
+        }
+        this.lastTimeTapped = Time.time;
 
-                switch (actionIndex)
-                {
-                    case 1:
-                    case 2:
-                    case 3:
-                        var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
-                        var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
-                        var copy = GameObject.Instantiate(this.unityChan);
-                        copy.GetComponent<Animator>().Play(animHash, -1, animTime);
-                        copy.transform.position = GazeManager.Instance.HitPosition;
-                        copy.transform.LookAt(Camera.main.transform);
-                        copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
-                        this.copyActors.Add(copy);
-                        break;
-                    case 4:
-                    case 5:
-                    case 6:
-                        this.IsDrawSpatialMappingWireframe = !this.IsDrawSpatialMappingWireframe;
-                        this.spatialMappingManager.SurfaceMaterial = this.IsDrawSpatialMappingWireframe ? this.spatialMappingMaterialWireframe : this.spatialMappingMaterialOcclusion;
-                        break;
-                }
-            }
-            finally
-            {
-                this.IsHolding = false;
-            }
+        switch (obj.name)
+        {
+            case "Close":
+                this.appBar.gameObject.SetActive(false);
+                break;
+            case "Mapping":
+                this.IsDrawSpatialMappingWireframe = !this.IsDrawSpatialMappingWireframe;
+                this.spatialMappingManager.SurfaceMaterial = this.IsDrawSpatialMappingWireframe ? this.spatialMappingMaterialWireframe : this.spatialMappingMaterialOcclusion;
+                break;
+            case "BGM":
+                this.audioSource.volume = (audioSource.volume > 0f) ? 0f : 0.5f;
+                break;
+            default:
+                base.InputClicked(obj, eventData);
+                break;
         }
     }
 }
