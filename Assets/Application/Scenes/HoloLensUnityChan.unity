@@ -704,216 +704,59 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: interactables.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].OnTappedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+    - target: {fileID: 4651648800803126, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: UseRemove
-      value: 0
+    - target: {fileID: 1278618970713088, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
+      propertyPath: m_Name
+      value: FloatingAppBar
       objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: UseAdjust
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: UseHide
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].OnTappedEvent.m_TypeName
-      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[1].OnTappedEvent.m_TypeName
-      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[2].OnTappedEvent.m_TypeName
-      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].Text
-      value: Close
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: DisplayType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[1].Text
-      value: Mapping
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[2].Text
-      value: BGM
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[1].DefaultPosition
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[2].DefaultPosition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: State
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: CustomButtonIconProfile
-      value: 
-      objectReference: {fileID: 11400000, guid: 941d0b47b39571c4ba526f25c31651af,
-        type: 2}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: interactables.Array.data[0]
-      value: 
-      objectReference: {fileID: 2001682008}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].Name
-      value: Close
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[1].Name
-      value: Mapping
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[2].Name
-      value: BGM
-      objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4773597359991020, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].OnTappedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].OnTappedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].OnTappedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2001682010}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].OnTappedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HideAppBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: buttons.Array.data[0].OnTappedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
+    - target: {fileID: 114997232948674480, guid: 688b236d5e405e549af7b966d081e99a,
         type: 2}
       propertyPath: buttons.Array.data[0].EventTarget
       value: 
       objectReference: {fileID: 2001682010}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
+    - target: {fileID: 114997232948674480, guid: 688b236d5e405e549af7b966d081e99a,
         type: 2}
       propertyPath: buttons.Array.data[1].EventTarget
       value: 
       objectReference: {fileID: 2001682010}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
+    - target: {fileID: 114997232948674480, guid: 688b236d5e405e549af7b966d081e99a,
         type: 2}
       propertyPath: buttons.Array.data[2].EventTarget
       value: 
       objectReference: {fileID: 2001682010}
-    - target: {fileID: 1275815092924048, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
-        type: 2}
-      propertyPath: SquareButtonPrefab
-      value: 
-      objectReference: {fileID: 1497233478742506, guid: dbfc183ddab73f1449963f04cd73d271,
-        type: 2}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: aa610ada334bff640a535f0d23a9a15c, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 688b236d5e405e549af7b966d081e99a, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1764224969
 Prefab:
@@ -1028,62 +871,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a611e772ef8ddf64d8106a9cbb70f31c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1970688182 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1275815092924048, guid: aa610ada334bff640a535f0d23a9a15c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1725276220}
 --- !u!114 &1970688183 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
+  m_PrefabParentObject: {fileID: 114997232948674480, guid: 688b236d5e405e549af7b966d081e99a,
     type: 2}
   m_PrefabInternal: {fileID: 1725276220}
   m_Script: {fileID: 11500000, guid: 80c870726057bb743b9c4f8faa604b98, type: 3}
---- !u!114 &1970688185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1970688182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09bc724c1c1ace45a2ec3f11ce09be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpdateLinkedTransform: 0
-  MoveLerpTime: 0.1
-  RotateLerpTime: 0.1
-  ScaleLerpTime: 0
-  MaintainScale: 1
-  GoalPosition: {x: 0, y: 0, z: 0}
-  GoalRotation: {x: 0, y: 0, z: 0, w: 0}
-  GoalScale: {x: 0, y: 0, z: 0}
-  Smoothing: 1
-  Lifetime: 0
-  ReferenceDirection: 1
-  MinDistance: 1
-  MaxDistance: 2
-  MinViewDegrees: 0
-  MaxViewDegrees: 20
-  AspectV: 0.7
-  IgnoreAngleClamp: 0
-  IgnoreDistanceClamp: 0
-  OrientToRefDir: 0
---- !u!114 &1970688186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1970688182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87713fbad4edbc46a3cc23770b0b4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  element: 6
-  handedness: 1
-  trackedObjectToReference: 0
-  transformTarget: {fileID: 0}
 --- !u!1 &2001682008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,8 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d446d6e8ae667444380fdcf0c5328bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactables:
-  - {fileID: 2001682008}
+  interactables: []
   Targets: []
   lockFocus: 0
   guidanceText: {fileID: 712255073}
