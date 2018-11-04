@@ -7,7 +7,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-
 namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 {
     /// <summary>
@@ -30,7 +29,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
         [SerializeField]
-        [Tooltip("To visualize the object bounding box, drop the HoloToolKit/UX/Prefabs/BoundingBoxes/BoundingBoxBasic.prefab here. This is optional.")]
+        [Tooltip("To visualize the object bounding box, drop the HoloToolkit/UX/Prefabs/BoundingBoxes/BoundingBoxBasic.prefab here. This is optional.")]
         private BoundingBox boundingBoxPrefab = null;
 
         /// <summary>
@@ -38,15 +37,8 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         /// </summary>
         public BoundingBox BoundingBoxPrefab
         {
-            set
-            {
-                boundingBoxPrefab = value;
-            }
-
-            get
-            {
-                return boundingBoxPrefab;
-            }
+            set { boundingBoxPrefab = value; }
+            get { return boundingBoxPrefab; }
         }
 
         [SerializeField]
@@ -66,7 +58,11 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         public AxisConstraint RotationConstraint
         {
             get { return rotationConstraint; }
-            set { rotationConstraint = value; }
+            set
+            {
+                rotationConstraint = value;
+                rotateLogic = new TwoHandRotateLogic(rotationConstraint);
+            }
         }
 
         [SerializeField]
@@ -79,7 +75,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
             set { enableOneHandMovement = value; }
         }
 
-        // private fields that store transform information.
+        // Private fields that store transform information.
         #region Transform Info
 
         private BoundingBox boundingBoxInstance;
@@ -91,7 +87,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         #endregion Transform Info
 
         /// <summary>
-        /// Maps input id -> position of hand
+        /// Maps input id -> position of hand.
         /// </summary>
         private readonly Dictionary<uint, Vector3> handsPressedLocationsMap = new Dictionary<uint, Vector3>();
 
@@ -117,7 +113,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 
                     if (value)
                     {
-                        boundingBoxInstance.Target = gameObject;
+                        boundingBoxInstance.Target = HostTransform.gameObject;
                         boundingBoxInstance.gameObject.SetActive(true);
                     }
                     else
@@ -130,17 +126,14 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
         /// <summary>
-        /// SetManipulationMode
+        /// Change the manipulation mode.
         /// </summary>
-        [System.Obsolete("Use ManipulationMode")]
+        [System.Obsolete("Use ManipulationMode.")]
         public void SetManipulationMode(ManipulationMode mode)
         {
             manipulationMode = mode;
         }
 
-        /// <summary>
-        /// Private Methods
-        /// </summary>
         private void Awake()
         {
             moveLogic = new TwoHandMoveLogic();
@@ -158,7 +151,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 
         private void Update()
         {
-            //Update positions of all hands
+            // Update positions of all hands
             foreach (var key in handsPressedInputSourceMap.Keys)
             {
                 var inputSource = handsPressedInputSourceMap[key];
@@ -196,7 +189,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
         /// <summary>
-        /// /// Event Handler receives input from inputSource
+        /// Event Handler receives input from inputSource.
         /// </summary>
         public void OnInputDown(InputEventData eventData)
         {
@@ -208,7 +201,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
         /// <summary>
-        /// Event Handler receives input from inputSource
+        /// Event Handler receives input from inputSource.
         /// </summary>
         public void OnInputUp(InputEventData eventData)
         {
@@ -218,12 +211,12 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
         /// <summary>
-        /// OnSourceDetected Event Handler
+        /// OnSourceDetected Event Handler.
         /// </summary>
         public void OnSourceDetected(SourceStateEventData eventData) { }
 
         /// <summary>
-        /// OnSourceLost
+        /// OnSourceLost Event Handler.
         /// </summary>
         public void OnSourceLost(SourceStateEventData eventData)
         {
@@ -233,7 +226,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         }
 
         /// <summary>
-        /// private Event Handlers
+        /// Updates the state machine based on the current state and anything that might have changed with the hands.
         /// </summary>
         private void UpdateStateMachine()
         {
@@ -248,9 +241,9 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                     {
                         newState = ManipulationMode.None;
                     }
-                    else if (handsPressedCount == 1 && enableOneHandMovement)
+                    else if (handsPressedCount == 1)
                     {
-                        newState = ManipulationMode.Move;
+                        newState = enableOneHandMovement ? ManipulationMode.Move : ManipulationMode.None;
                     }
                     else if (handsPressedCount > 1)
                     {
@@ -263,14 +256,13 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
                 case ManipulationMode.MoveAndRotate:
                 case ManipulationMode.RotateAndScale:
                 case ManipulationMode.MoveScaleAndRotate:
-                    // TODO: if < 2, make this go to start state ('drop it')
                     if (handsPressedCount == 0)
                     {
                         newState = ManipulationMode.None;
                     }
                     else if (handsPressedCount == 1)
                     {
-                        newState = ManipulationMode.Move;
+                        newState = enableOneHandMovement ? ManipulationMode.Move : ManipulationMode.None;
                     }
                     break;
             }
@@ -418,7 +410,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         {
             InputManager.Instance.PushModalInputHandler(gameObject);
 
-            //Show Bounding Box visual on manipulation interaction
+            // Show Bounding Box visual on manipulation interaction
             ShowBoundingBox = true;
         }
 
@@ -426,7 +418,7 @@ namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
         {
             InputManager.Instance.PopModalInputHandler();
 
-            //Hide Bounding Box visual on release
+            // Hide Bounding Box visual on release
             ShowBoundingBox = false;
         }
     }
