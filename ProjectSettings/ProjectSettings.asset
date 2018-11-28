@@ -633,7 +633,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 80adbaf41ae6d401
+  metroCertificateNotAfter: 809cf914eea5d501
   metroApplicationDescription: MRUnityChan
   wsaImages: {}
   metroTileShortName: MRUnityChan
@@ -650,27 +650,39 @@ PlayerSettings:
   platformCapabilities:
     WindowsStoreApps:
       AllJoyn: False
+      Appointments: False
+      BackgroundMediaPlayback: False
       BlockedChatMessages: False
       Bluetooth: False
       Chat: False
       CodeGeneration: False
+      Contacts: False
       EnterpriseAuthentication: False
       HumanInterfaceDevice: True
       InputInjectionBrokered: False
       InternetClient: False
       InternetClientServer: False
       Location: False
+      LowLevelDevices: False
       Microphone: True
       MusicLibrary: True
       Objects3D: False
+      OfflineMapsManagement: False
       PhoneCall: False
+      PhoneCallHistoryPublic: False
       PicturesLibrary: True
+      PointOfService: False
       PrivateNetworkClientServer: False
       Proximity: False
+      RecordedCallsFolder: False
+      RemoteSystem: False
       RemovableStorage: False
       SharedUserCertificates: False
       SpatialPerception: True
+      SystemManagement: False
       UserAccountInformation: False
+      UserDataTasks: False
+      UserNotificationListener: False
       VideosLibrary: True
       VoipCall: False
       WebCam: True
