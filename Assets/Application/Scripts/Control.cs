@@ -16,7 +16,6 @@ public class Control : InteractionReceiver
     public Material spatialMappingMaterialWireframe;
     public Material spatialMappingMaterialOcclusion;
     public AudioSource audioSource;
-    public GameObject floor;
     public AppBar appBar;
     public IList<GameObject> copyActors = new List<GameObject>();
     private bool IsDrawSpatialMappingWireframe { get; set; }
@@ -28,7 +27,6 @@ public class Control : InteractionReceiver
         this.StartCoroutine(this.Process());
         this.StartCoroutine(this.MusicStarter());
 
-        this.floor.SetActive(MixedRealityCameraManager.Instance.CurrentDisplayType == MixedRealityCameraManager.DisplayType.Opaque);
         this.lastTimeTapped = Time.time + this.coolDownTime;
     }
 

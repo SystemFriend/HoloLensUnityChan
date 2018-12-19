@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.ImageEffects;
 
 public class CameraSwitcher : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class CameraSwitcher : MonoBehaviour
         followPoint = target.position;
 
         // Initialize DOF fx.
-        var dofFx = GetComponentInChildren<DepthOfFieldScatter>();
+        var dofFx = GetComponentInChildren<DepthOfField>();
         if (dofFx) dofFx.focalTransform = target;
 
         // Start auto-changer if it's enabled.
