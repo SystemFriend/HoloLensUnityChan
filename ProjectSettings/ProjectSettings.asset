@@ -40,7 +40,8 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_VirtualRealitySplashScreen: {fileID: 0}
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 6a21f4585403c99429f8ed6df3c65514,
+    type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
@@ -261,7 +262,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 0}
+      m_Icon: {fileID: 2800000, guid: 96736cf102658d24f9fa3c3551effadf, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -584,9 +585,13 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 809cf914eea5d501
+  metroCertificateNotAfter: 8076c8bbf4d1d501
   metroApplicationDescription: MRUnityChan
-  wsaImages: {}
+  wsaImages:
+    2031816: Assets/Application/Resources/Logo/Dark_088x088.png
+    2097352: Assets/Application/Resources/Logo/Dark_142x142.png
+    2162888: Assets/Application/Resources/Logo/Dark_300x300.png
+    2228424: Assets/Application/Resources/Logo/Dark_620x620.png
   metroTileShortName: MRUnityChan
   metroTileShowName: 0
   metroMediumTileShowName: 0
@@ -617,13 +622,13 @@ PlayerSettings:
       InternetClientServer: False
       Location: False
       LowLevelDevices: False
-      Microphone: True
-      MusicLibrary: True
+      Microphone: False
+      MusicLibrary: False
       Objects3D: False
       OfflineMapsManagement: False
       PhoneCall: False
       PhoneCallHistoryPublic: False
-      PicturesLibrary: True
+      PicturesLibrary: False
       PointOfService: False
       PrivateNetworkClientServer: False
       Proximity: False
@@ -636,10 +641,17 @@ PlayerSettings:
       UserAccountInformation: False
       UserDataTasks: False
       UserNotificationListener: False
-      VideosLibrary: True
+      VideosLibrary: False
       VoipCall: False
-      WebCam: True
-  metroTargetDeviceFamilies: {}
+      WebCam: False
+  metroTargetDeviceFamilies:
+    Desktop: False
+    Holographic: False
+    IoT: False
+    IoTHeadless: False
+    Mobile: False
+    Team: False
+    Xbox: False
   metroFTAName: 
   metroFTAFileTypes: []
   metroProtocolName: 
