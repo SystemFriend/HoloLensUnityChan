@@ -18,14 +18,14 @@ PlayerSettings:
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
-  m_ShowUnitySplashLogo: 1
+  m_ShowUnitySplashLogo: 0
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 1
   m_SplashScreenDrawMode: 0
   m_SplashScreenBackgroundAnimationZoom: 1
   m_SplashScreenLogoAnimationZoom: 1
-  m_SplashScreenBackgroundLandscapeAspect: 1
+  m_SplashScreenBackgroundLandscapeAspect: 2.0666666
   m_SplashScreenBackgroundPortraitAspect: 1
   m_SplashScreenBackgroundLandscapeUvs:
     serializedVersion: 2
@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 6a21f4585403c99429f8ed6df3c65514,
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: af2531ddff6989145849ddd6a2235889,
     type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
@@ -262,7 +262,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 96736cf102658d24f9fa3c3551effadf, type: 3}
+      m_Icon: {fileID: 0}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -588,10 +588,104 @@ PlayerSettings:
   metroCertificateNotAfter: 8076c8bbf4d1d501
   metroApplicationDescription: MRUnityChan
   wsaImages:
-    2031816: Assets/Application/Resources/Logo/Dark_088x088.png
-    2097352: Assets/Application/Resources/Logo/Dark_142x142.png
-    2162888: Assets/Application/Resources/Logo/Dark_300x300.png
-    2228424: Assets/Application/Resources/Logo/Dark_620x620.png
+    65552: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
+    65560: Assets/TileGenerator/MRUnityChan_AppIcon_24x24.png
+    65568: Assets/TileGenerator/MRUnityChan_AppIcon_32x32.png
+    65584: Assets/TileGenerator/MRUnityChan_AppIcon_48x48.png
+    65616: Assets/TileGenerator/MRUnityChan_AppIcon_40x40.png
+    65636: Assets/TileGenerator/MRUnityChan_AppIcon_50x50.png
+    65661: Assets/TileGenerator/MRUnityChan_AppIcon_63x63.png
+    65676: Assets/TileGenerator/MRUnityChan_AppIcon_70x70.png
+    65686: Assets/TileGenerator/MRUnityChan_AppIcon_75x75.png
+    65716: Assets/TileGenerator/MRUnityChan_AppIcon_90x90.png
+    65736: Assets/TileGenerator/MRUnityChan_AppIcon_100x100.png
+    65776: Assets/TileGenerator/MRUnityChan_AppIcon_120x120.png
+    65792: Assets/TileGenerator/MRUnityChan_AppIcon_256x256.png
+    65936: Assets/TileGenerator/MRUnityChan_AppIcon_200x200.png
+    131088: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
+    131096: Assets/TileGenerator/MRUnityChan_AppIcon_24x24.png
+    131104: Assets/TileGenerator/MRUnityChan_AppIcon_32x32.png
+    131120: Assets/TileGenerator/MRUnityChan_AppIcon_48x48.png
+    131152: 
+    131172: 
+    131197: 
+    131212: 
+    131222: 
+    131252: 
+    131272: 
+    131312: 
+    131328: Assets/TileGenerator/MRUnityChan_AppIcon_256x256.png
+    131472: Assets/TileGenerator/BaseSplashImage_2480x1200.png
+    2031632: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
+    2031640: Assets/TileGenerator/MRUnityChan_AppIcon_24x24.png
+    2031648: Assets/TileGenerator/MRUnityChan_AppIcon_32x32.png
+    2031664: Assets/TileGenerator/MRUnityChan_AppIcon_48x48.png
+    2031696: Assets/TileGenerator/MRUnityChan_AppIcon_36x36.png
+    2031716: Assets/TileGenerator/MRUnityChan_AppIcon_44x44.png
+    2031741: Assets/TileGenerator/MRUnityChan_AppIcon_55x55.png
+    2031756: Assets/TileGenerator/MRUnityChan_AppIcon_62x62.png
+    2031766: Assets/TileGenerator/MRUnityChan_AppIcon_66x66.png
+    2031796: Assets/TileGenerator/MRUnityChan_AppIcon_80x80.png
+    2031816: Assets/TileGenerator/MRUnityChan_AppIcon_88x88.png
+    2031856: Assets/TileGenerator/MRUnityChan_AppIcon_106x106.png
+    2031872: Assets/TileGenerator/MRUnityChan_AppIcon_256x256.png
+    2032016: Assets/TileGenerator/MRUnityChan_AppIcon_176x176.png
+    2097168: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
+    2097176: Assets/TileGenerator/MRUnityChan_AppIcon_24x24.png
+    2097184: Assets/TileGenerator/MRUnityChan_AppIcon_32x32.png
+    2097200: Assets/TileGenerator/MRUnityChan_AppIcon_48x48.png
+    2097232: Assets/TileGenerator/MRUnityChan_AppIcon_57x57.png
+    2097252: Assets/TileGenerator/MRUnityChan_AppIcon_71x71.png
+    2097277: Assets/TileGenerator/MRUnityChan_AppIcon_89x89.png
+    2097292: Assets/TileGenerator/MRUnityChan_AppIcon_100x100.png
+    2097302: Assets/TileGenerator/MRUnityChan_AppIcon_107x107.png
+    2097332: Assets/TileGenerator/MRUnityChan_AppIcon_128x128.png
+    2097352: Assets/TileGenerator/MRUnityChan_AppIcon_142x142.png
+    2097392: Assets/TileGenerator/MRUnityChan_AppIcon_171x171.png
+    2097408: Assets/TileGenerator/MRUnityChan_AppIcon_256x256.png
+    2097552: Assets/TileGenerator/MRUnityChan_AppIcon_284x284.png
+    2162704: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
+    2162712: Assets/TileGenerator/MRUnityChan_AppIcon_24x24.png
+    2162720: Assets/TileGenerator/MRUnityChan_AppIcon_32x32.png
+    2162736: Assets/TileGenerator/MRUnityChan_AppIcon_48x48.png
+    2162768: Assets/TileGenerator/MRUnityChan_AppIcon_120x120.png
+    2162788: Assets/TileGenerator/MRUnityChan_AppIcon_150x150.png
+    2162813: Assets/TileGenerator/MRUnityChan_AppIcon_188x188.png
+    2162828: Assets/TileGenerator/MRUnityChan_AppIcon_210x210.png
+    2162838: Assets/TileGenerator/MRUnityChan_AppIcon_225x225.png
+    2162868: Assets/TileGenerator/MRUnityChan_AppIcon_270x270.png
+    2162888: Assets/TileGenerator/MRUnityChan_AppIcon_300x300.png
+    2162928: Assets/TileGenerator/MRUnityChan_AppIcon_360x360.png
+    2162944: Assets/TileGenerator/MRUnityChan_AppIcon_256x256.png
+    2163088: Assets/TileGenerator/MRUnityChan_AppIcon_600x600.png
+    2228240: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
+    2228248: Assets/TileGenerator/MRUnityChan_AppIcon_24x24.png
+    2228256: Assets/TileGenerator/MRUnityChan_AppIcon_32x32.png
+    2228272: Assets/TileGenerator/MRUnityChan_AppIcon_48x48.png
+    2228304: Assets/TileGenerator/MRUnityChan_AppIcon_248x248.png
+    2228324: Assets/TileGenerator/MRUnityChan_AppIcon_310x310.png
+    2228349: Assets/TileGenerator/MRUnityChan_AppIcon_388x388.png
+    2228364: Assets/TileGenerator/MRUnityChan_AppIcon_434x434.png
+    2228374: Assets/TileGenerator/MRUnityChan_AppIcon_465x465.png
+    2228404: Assets/TileGenerator/MRUnityChan_AppIcon_558x558.png
+    2228424: Assets/TileGenerator/MRUnityChan_AppIcon_620x620.png
+    2228464: Assets/TileGenerator/MRUnityChan_AppIcon_744x744.png
+    2228480: Assets/TileGenerator/MRUnityChan_AppIcon_256x256.png
+    2228624: Assets/TileGenerator/BaseIcon_1240x1240.png
+    2293776: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
+    2293784: Assets/TileGenerator/MRUnityChan_AppIcon_24x24.png
+    2293792: Assets/TileGenerator/MRUnityChan_AppIcon_32x32.png
+    2293808: Assets/TileGenerator/MRUnityChan_AppIcon_48x48.png
+    2293840: 
+    2293860: 
+    2293885: 
+    2293900: 
+    2293910: 
+    2293940: 
+    2293960: Assets/TileGenerator/MRUnityChan_AppIcon_620x300.png
+    2294000: 
+    2294016: Assets/TileGenerator/MRUnityChan_AppIcon_256x256.png
+    2294160: Assets/TileGenerator/MRUnityChan_AppIcon_1240x600.png
   metroTileShortName: MRUnityChan
   metroTileShowName: 0
   metroMediumTileShowName: 0
