@@ -1,4 +1,6 @@
 ﻿using Microsoft.MixedReality.Toolkit;
+using Microsoft.MixedReality.Toolkit.SpatialAwareness;
+using Microsoft.MixedReality.Toolkit.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +10,8 @@ public class Control : MonoBehaviour
 {
     public TextMesh guidanceText;
     public GameObject unityChan;
-    //public SpatialMappingManager spatialMappingManager;
-    public Material spatialMappingMaterialWireframe;
-    public Material spatialMappingMaterialOcclusion;
     public AudioSource audioSource;
-    ////public AppBar appBar;
+    public GameObject menuBar;
     private IList<GameObject> copyActors = new List<GameObject>();
     private bool IsDrawSpatialMappingWireframe { get; set; }
     private float lastTimeTapped = 0f;
@@ -86,6 +85,11 @@ public class Control : MonoBehaviour
 
     public void SummonNewAvator()
     {
+        if (CoreServices.InputSystem.GazeProvider.GazeTarget?.GetComponent<Interactable>() != null)
+        {
+            return;
+        }
+
         var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
         var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
         var copy = GameObject.Instantiate(this.unityChan);
@@ -102,29 +106,24 @@ public class Control : MonoBehaviour
         this.copyActors.Add(copy);
     }
 
-    //protected override void InputClicked(GameObject obj, InputClickedEventData eventData)
-    //{
-    //    if (Time.time < this.lastTimeTapped + this.coolDownTime)
-    //    {
-    //        return;
-    //    }
-    //    this.lastTimeTapped = Time.time;
+    public void OpenMenu()
+    {
+        this.menuBar.gameObject.SetActive(true);
+    }
 
-    //    switch (obj.name)
-    //    {
-    //        case "Close":
-    //            this.appBar.gameObject.SetActive(false);
-    //            break;
-    //        case "Mapping":
-    //            this.IsDrawSpatialMappingWireframe = !this.IsDrawSpatialMappingWireframe;
-    //            this.spatialMappingManager.SurfaceMaterial = this.IsDrawSpatialMappingWireframe ? this.spatialMappingMaterialWireframe : this.spatialMappingMaterialOcclusion;
-    //            break;
-    //        case "BGM":
-    //            this.audioSource.volume = (audioSource.volume > 0f) ? 0f : 0.5f;
-    //            break;
-    //        default:
-    //            base.InputClicked(obj, eventData);
-    //            break;
-    //    }
-    //}
+    public void CloseMenu()
+    {
+        this.menuBar.gameObject.SetActive(false);
+    }
+
+    public void ToggleMapping()
+    {
+        var observer = (CoreServices.SpatialAwarenessSystem as IMixedRealityDataProviderAccess).GetDataProvider<IMixedRealitySpatialAwarenessMeshObserver>();
+        observer.DisplayOption = (observer.DisplayOption == SpatialAwarenessMeshDisplayOptions.Occlusion) ? SpatialAwarenessMeshDisplayOptions.Visible : SpatialAwarenessMeshDisplayOptions.Occlusion;
+    }
+
+    public void ToggleBGM()
+    {
+        this.audioSource.volume = (audioSource.volume > 0f) ? 0f : 0.5f;
+    }
 }

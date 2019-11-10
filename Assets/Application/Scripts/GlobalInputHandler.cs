@@ -3,16 +3,10 @@ using Microsoft.MixedReality.Toolkit.Input;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GlobalInputHandler : MonoBehaviour, IMixedRealityPointerHandler
+public class GlobalInputHandler : MonoBehaviour, IMixedRealityGestureHandler
 {
     public UnityEvent globalTapped;
-    private float lastTimeTapped = 0f;
-    private float coolDownTime = 1.0f;
-
-    void Start()
-    {
-        this.lastTimeTapped = Time.time + this.coolDownTime;
-    }
+    public UnityEvent globalHold;
 
     private void OnEnable()
     {
@@ -24,46 +18,29 @@ public class GlobalInputHandler : MonoBehaviour, IMixedRealityPointerHandler
         CoreServices.InputSystem?.PopFallbackInputHandler();
     }
 
-    public void OnSourceDetected(SourceStateEventData eventData)
+    public void OnGestureStarted(InputEventData eventData)
     {
     }
 
-    public void OnSourceLost(SourceStateEventData eventData)
+    public void OnGestureUpdated(InputEventData eventData)
     {
     }
 
-    public void OnPointerDown(MixedRealityPointerEventData eventData)
+    public void OnGestureCompleted(InputEventData eventData)
     {
+        var action = eventData.MixedRealityInputAction.Description;
+        Debug.Log($"action={action}");
+        if (action == "Hold Action")
+        {
+            this.globalHold?.Invoke();
+        }
+        else if (action == "Select")
+        {
+            this.globalTapped?.Invoke();
+        }
     }
 
-    public void OnPointerDragged(MixedRealityPointerEventData eventData)
+    public void OnGestureCanceled(InputEventData eventData)
     {
     }
-
-    public void OnPointerUp(MixedRealityPointerEventData eventData)
-    {
-    }
-
-    public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-        this.globalTapped?.Invoke();
-    }
-
-
-    //private void OnHoldCompleted(HoldEventData eventData)
-    //{
-    //}
-
-    //public void OnHoldStarted(HoldEventData eventData)
-    //{
-    //}
-
-    //void IHoldHandler.OnHoldCompleted(HoldEventData eventData)
-    //{
-    //    this.controller.appBar.gameObject.SetActive(true);
-    //}
-
-    //public void OnHoldCanceled(HoldEventData eventData)
-    //{
-    //}
 }
