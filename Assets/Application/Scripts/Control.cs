@@ -1,23 +1,19 @@
-﻿using HoloToolkit.Unity;
-using HoloToolkit.Unity.InputModule;
-using HoloToolkit.Unity.Receivers;
-using HoloToolkit.Unity.SpatialMapping;
-using HoloToolkit.Unity.UX;
+﻿using Microsoft.MixedReality.Toolkit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Control : InteractionReceiver
+public class Control : MonoBehaviour
 {
     public TextMesh guidanceText;
     public GameObject unityChan;
-    public SpatialMappingManager spatialMappingManager;
+    //public SpatialMappingManager spatialMappingManager;
     public Material spatialMappingMaterialWireframe;
     public Material spatialMappingMaterialOcclusion;
     public AudioSource audioSource;
-    public AppBar appBar;
-    public IList<GameObject> copyActors = new List<GameObject>();
+    ////public AppBar appBar;
+    private IList<GameObject> copyActors = new List<GameObject>();
     private bool IsDrawSpatialMappingWireframe { get; set; }
     private float lastTimeTapped = 0f;
     private float coolDownTime = 0.5f;
@@ -47,7 +43,6 @@ public class Control : InteractionReceiver
         this.copyActors = new List<GameObject>();
 
         unityChanRigidbody.isKinematic = true;
-        CameraCache.Main.nearClipPlane = 0.01f;
         while (true)
         {
             if (unityChanRigidbody.isKinematic && ((DateTime.Now - startTime) > new TimeSpan(0, 0, 10)))
@@ -89,29 +84,47 @@ public class Control : InteractionReceiver
         }
     }
 
-    protected override void InputClicked(GameObject obj, InputClickedEventData eventData)
+    public void SummonNewAvator()
     {
-        if (Time.time < this.lastTimeTapped + this.coolDownTime)
-        {
-            return;
-        }
-        this.lastTimeTapped = Time.time;
+        var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
+        var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+        var copy = GameObject.Instantiate(this.unityChan);
+        copy.GetComponent<Animator>().Play(animHash, -1, animTime);
 
-        switch (obj.name)
+        var position = CoreServices.InputSystem.GazeProvider.HitPosition;
+        if (position == Vector3.zero)
         {
-            case "Close":
-                this.appBar.gameObject.SetActive(false);
-                break;
-            case "Mapping":
-                this.IsDrawSpatialMappingWireframe = !this.IsDrawSpatialMappingWireframe;
-                this.spatialMappingManager.SurfaceMaterial = this.IsDrawSpatialMappingWireframe ? this.spatialMappingMaterialWireframe : this.spatialMappingMaterialOcclusion;
-                break;
-            case "BGM":
-                this.audioSource.volume = (audioSource.volume > 0f) ? 0f : 0.5f;
-                break;
-            default:
-                base.InputClicked(obj, eventData);
-                break;
+            position = Camera.main.transform.TransformDirection(Camera.main.transform.localPosition + new Vector3(0, 0, 1.5f));
         }
+        copy.transform.position = position;
+        copy.transform.LookAt(Camera.main.transform);
+        copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
+        this.copyActors.Add(copy);
     }
+
+    //protected override void InputClicked(GameObject obj, InputClickedEventData eventData)
+    //{
+    //    if (Time.time < this.lastTimeTapped + this.coolDownTime)
+    //    {
+    //        return;
+    //    }
+    //    this.lastTimeTapped = Time.time;
+
+    //    switch (obj.name)
+    //    {
+    //        case "Close":
+    //            this.appBar.gameObject.SetActive(false);
+    //            break;
+    //        case "Mapping":
+    //            this.IsDrawSpatialMappingWireframe = !this.IsDrawSpatialMappingWireframe;
+    //            this.spatialMappingManager.SurfaceMaterial = this.IsDrawSpatialMappingWireframe ? this.spatialMappingMaterialWireframe : this.spatialMappingMaterialOcclusion;
+    //            break;
+    //        case "BGM":
+    //            this.audioSource.volume = (audioSource.volume > 0f) ? 0f : 0.5f;
+    //            break;
+    //        default:
+    //            base.InputClicked(obj, eventData);
+    //            break;
+    //    }
+    //}
 }
