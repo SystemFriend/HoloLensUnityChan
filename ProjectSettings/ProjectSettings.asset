@@ -616,7 +616,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 8076c8bbf4d1d501
+  metroCertificateNotAfter: 803f941f34b7d601
   metroApplicationDescription: MRUnityChan
   wsaImages:
     65552: Assets/TileGenerator/MRUnityChan_AppIcon_16x16.png
