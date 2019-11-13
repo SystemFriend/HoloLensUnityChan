@@ -1,6 +1,6 @@
 ﻿using Microsoft.MixedReality.Toolkit;
+using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.SpatialAwareness;
-using Microsoft.MixedReality.Toolkit.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,17 +12,21 @@ public class Control : MonoBehaviour
     public GameObject unityChan;
     public AudioSource audioSource;
     public GameObject menuBar;
+    public GameObject floor;
     private IList<GameObject> copyActors = new List<GameObject>();
-    private bool IsDrawSpatialMappingWireframe { get; set; }
-    private float lastTimeTapped = 0f;
-    private float coolDownTime = 0.5f;
 
     void Start()
     {
+        Debug.developerConsoleVisible = false;
+        var capabilityCheck = CoreServices.SpatialAwarenessSystem as IMixedRealityCapabilityCheck;
+        if (capabilityCheck != null)
+        {
+            var supportsSpatialMesh = capabilityCheck.CheckCapability(MixedRealityCapability.SpatialAwarenessMesh);
+            this.floor.SetActive(!supportsSpatialMesh);
+        }
+
         this.StartCoroutine(this.Process());
         this.StartCoroutine(this.MusicStarter());
-
-        this.lastTimeTapped = Time.time + this.coolDownTime;
     }
 
     private IEnumerator MusicStarter()
@@ -83,9 +87,9 @@ public class Control : MonoBehaviour
         }
     }
 
-    public void SummonNewAvator()
+    public void SummonNewAvator(IMixedRealityPointer pointer)
     {
-        if (CoreServices.InputSystem.GazeProvider.GazeTarget?.GetComponent<Interactable>() != null)
+        if (this.menuBar.activeInHierarchy)
         {
             return;
         }
@@ -95,12 +99,7 @@ public class Control : MonoBehaviour
         var copy = GameObject.Instantiate(this.unityChan);
         copy.GetComponent<Animator>().Play(animHash, -1, animTime);
 
-        var position = CoreServices.InputSystem.GazeProvider.HitPosition;
-        if (position == Vector3.zero)
-        {
-            position = Camera.main.transform.TransformDirection(Camera.main.transform.localPosition + new Vector3(0, 0, 1.5f));
-        }
-        copy.transform.position = position;
+        copy.transform.position = pointer.BaseCursor.GameObjectReference.transform.position;
         copy.transform.LookAt(Camera.main.transform);
         copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
         this.copyActors.Add(copy);
