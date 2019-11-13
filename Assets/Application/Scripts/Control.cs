@@ -99,7 +99,7 @@ public class Control : MonoBehaviour
         var copy = GameObject.Instantiate(this.unityChan);
         copy.GetComponent<Animator>().Play(animHash, -1, animTime);
 
-        copy.transform.position = pointer.BaseCursor.GameObjectReference.transform.position;
+        copy.transform.position = pointer.Result.Details.Point;
         copy.transform.LookAt(Camera.main.transform);
         copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
         this.copyActors.Add(copy);
