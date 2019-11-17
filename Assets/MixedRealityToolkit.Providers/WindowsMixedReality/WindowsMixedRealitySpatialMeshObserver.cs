@@ -85,9 +85,13 @@ namespace Microsoft.MixedReality.Toolkit.WindowsMixedReality.SpatialAwareness
         /// <inheritdoc />
         public bool CheckCapability(MixedRealityCapability capability)
         {
-            if (WindowsApiChecker.UniversalApiContractV8_IsAvailable)
+            Debug.Log($"WindowsApiChecker.UniversalApiContractV7_IsAvailable=${WindowsApiChecker.UniversalApiContractV7_IsAvailable}");
+            Debug.Log($"WindowsApiChecker.UniversalApiContractV8_IsAvailable=${WindowsApiChecker.UniversalApiContractV8_IsAvailable}");
+
+            if (WindowsApiChecker.UniversalApiContractV7_IsAvailable)
             {
 #if WINDOWS_UWP
+                Debug.Log($"WindowsSpatialSurfaces.SpatialSurfaceObserver.IsSupported()=${WindowsSpatialSurfaces.SpatialSurfaceObserver.IsSupported()}");
                 return ((capability == MixedRealityCapability.SpatialAwarenessMesh) && WindowsSpatialSurfaces.SpatialSurfaceObserver.IsSupported());
 #endif // WINDOWS_UWP
             }
