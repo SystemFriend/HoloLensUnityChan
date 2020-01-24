@@ -771,13 +771,14 @@ PlayerSettings:
       CodeGeneration: False
       Contacts: False
       EnterpriseAuthentication: False
+      GazeInput: True
       HumanInterfaceDevice: True
       InputInjectionBrokered: False
-      InternetClient: False
+      InternetClient: True
       InternetClientServer: False
       Location: False
       LowLevelDevices: False
-      Microphone: False
+      Microphone: True
       MusicLibrary: False
       Objects3D: False
       OfflineMapsManagement: False
