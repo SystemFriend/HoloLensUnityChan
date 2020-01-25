@@ -11,7 +11,6 @@ public class Control : MonoBehaviour
     public TextMesh guidanceText;
     public GameObject unityChan;
     public AudioSource audioSource;
-    public GameObject menuBar;
     public GameObject floor;
     private IList<GameObject> copyActors = new List<GameObject>();
 
@@ -89,11 +88,6 @@ public class Control : MonoBehaviour
 
     public void SummonNewAvator(IMixedRealityPointer pointer)
     {
-        if (this.menuBar.activeInHierarchy)
-        {
-            return;
-        }
-
         var animHash = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash;
         var animTime = this.unityChan.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
         var copy = GameObject.Instantiate(this.unityChan);
@@ -103,16 +97,6 @@ public class Control : MonoBehaviour
         copy.transform.LookAt(Camera.main.transform);
         copy.transform.rotation = Quaternion.Euler(0f, copy.transform.rotation.eulerAngles.y, 0f);
         this.copyActors.Add(copy);
-    }
-
-    public void OpenMenu()
-    {
-        this.menuBar.gameObject.SetActive(true);
-    }
-
-    public void CloseMenu()
-    {
-        this.menuBar.gameObject.SetActive(false);
     }
 
     public void ToggleMapping()
