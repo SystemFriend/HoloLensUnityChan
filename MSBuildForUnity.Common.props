@@ -10,7 +10,7 @@
     <UnityCurrentTargetFramework>net46</UnityCurrentTargetFramework>
     
     <UnityMajorVersion>2019</UnityMajorVersion>
-    <UnityMinorVersion>3</UnityMinorVersion>
+    <UnityMinorVersion>4</UnityMinorVersion>
   </PropertyGroup>
   
   <Target Name="_RemoveOutputDirectory" AfterTargets="Clean">
