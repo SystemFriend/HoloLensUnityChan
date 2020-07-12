@@ -18,12 +18,9 @@ public class Control : MonoBehaviour
     void Start()
     {
         Debug.developerConsoleVisible = false;
-        var capabilityCheck = CoreServices.SpatialAwarenessSystem as IMixedRealityCapabilityCheck;
-        if (capabilityCheck != null)
-        {
-            var supportsSpatialMesh = capabilityCheck.CheckCapability(MixedRealityCapability.SpatialAwarenessMesh);
-            this.floor.SetActive(!supportsSpatialMesh);
-        }
+
+        //var supportsSpatialMesh = (Application.platform == RuntimePlatform.WSAPlayerARM);
+        //this.floor.SetActive(!supportsSpatialMesh);
 
         this.StartCoroutine(this.Process());
         this.StartCoroutine(this.MusicStarter());
