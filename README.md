@@ -4,10 +4,4 @@
 
 [![](http://img.youtube.com/vi/o4iZ5rFyn7E/0.jpg)](https://www.youtube.com/watch?v=o4iZ5rFyn7E)
 
-
-## Dependency
-
-* "Double Sided Shaders" asset.  
-https://assetstore.unity.com/packages/vfx/shaders/double-sided-shaders-23087
-
 © Unity Technologies Japan/UCL
